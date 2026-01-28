@@ -72,42 +72,4 @@ function filterTable() {
 
     let selectedField = document.querySelector('input[name="searchField"]:checked').value;
     window.location.href = `/home/filter?field=${selectedField}&value=${value}`;
-
-    // const fieldIndexMap = {
-    //     "All": 0,
-    //     "Id": 1,
-    //     "Name": 2,
-    //     "Surname": 3,
-    //     "Email": 4,
-    //     "Age": 5
-    // };
-    //
-    // let columIndex = fieldIndexMap[selectedField];
-    //
-    // console.log(columIndex);
-    //
-    // let body = document.getElementsByTagName('tbody')[0];
-    // let rows = Array.from(body.getElementsByTagName('tr'));
-    //
-    // for (const row of rows) {
-    //     if (columIndex == 0){
-    //         let cells = row.getElementsByTagName('td');
-    //         let find = false;
-    //         for (const cell of cells) {
-    //             if (cell.innerText.toLowerCase().includes(value)){
-    //                 find = true;
-    //                 break;
-    //             }
-    //         }
-    //
-    //         row.style.display = find ? '':'none';
-    //     }else{
-    //         let cell = row.getElementsByTagName('td')[columIndex-1];
-    //         if (cell.innerText.toLowerCase().includes(value)) {
-    //             row.style.display = '';
-    //         }else{
-    //             row.style.display = 'none';
-    //         }
-    //     }
-    // }
 }

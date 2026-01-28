@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${pageName}"></title>
-    <link rel="stylesheet" href="/static/css/style.css">
     <link th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/1.10.0/font/bootstrap-icons.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
@@ -20,7 +18,7 @@
     </main>
 </div>
 
-<div th:if="${showFooter == true}">
+<div th:if="${showFooter ?: false}">
     <footer th:replace="~{layout/footer :: footer}"></footer>
 </div>
 

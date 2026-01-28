@@ -173,6 +173,9 @@ public class HomeController {
         } else {
             model.addAttribute("org.springframework.validation.BindingResult.dto", bindir);
             model.addAttribute("dto", dto);
+            model.addAttribute("showFooter", true);
+            model.addAttribute("showHeader", false);
+            System.out.println("tyr");
             return "edit";
         }
     }
@@ -183,6 +186,8 @@ public class HomeController {
         if (bindir.hasErrors()) {
             model.addAttribute("org.springframework.validation.BindingResult.dto", bindir);
             model.addAttribute("dto", dto);
+            model.addAttribute("showFooter", true);
+            model.addAttribute("showHeader", false);
             return "create";
         } else {
             Profession profession = professionRepository.findFirstByNameEquals(dto.getProfession().getName());
