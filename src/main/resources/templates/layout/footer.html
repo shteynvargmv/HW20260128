@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<footer th:fragment="footer">
+    <div class="position-fixed bottom-0 start-0 end-0">
+        <div class="card footer" style="background-color:lightgray; border-color:lightgray;">
+            <h5 class="bg-gray-100" style="background-color:lightgray; border-color:lightgray;">Person:</h5>
+            <div class="card-body" style="background-color:lightgray; border-color:lightgray;">
+                <h5 class="card-title">
+                    <div th:if="${dto!=null and dto.getPerson().getName()!=null}" th:object="${dto.getPerson()}">
+                        <a th:text="*{name + ' ' + surname}"></a>
+                    </div>
+                    <div th:if="${dto==null or dto.getPerson().getName()==null}">
+                        <a>New person</a>
+                    </div>
+                </h5>
+                <p class="card-text" th:if="${dto!=null and dto.getPerson().getName()!=null}" th:object="${dto}"}>
+                    <a th:text="*{'E-mail: ' + person.email + ' Age: ' + person.age + ' Profession: ' + profession.name }"</a>
+                </p>
+                <a href="#" class="btn btn-primary" th:href="@{/home/people(page=${dto.getLastUsedPage()})}">Go back</a>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

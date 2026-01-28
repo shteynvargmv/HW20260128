@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<header th:fragment="header">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <div class="container-fluid p-0">
+                <a class="btn addAll" aria-current="page" th:href="@{/home/addAll}">Add All</a>
+                <a class="btn clr" aria-current="page" th:href="@{/home/clear}">Clear</a>
+                <a class="btn add" aria-current="page" th:href="@{/home/add}">Add</a>
+            </div>
+            <div class="justify-content-end">
+                <form class="d-flex " role="search" onsubmit="filterTable()">
+                    <input id="globalFilter" oninput="filterTable()" class="form-control me-2" type="search"
+                           placeholder="Search" th:value="${filterValue}" aria-label="Search" autofocus="autofocus"
+                           onfocus="this.setSelectionRange(this.value.length, this.value.length)"/>
+                    <button class="btn btn-outline-success m-sm-0" type="submit">Search</button>
+                </form>
+                <div class="container-fluid text-end p-0" style="white-space: nowrap; overflow-x: auto;">
+                    <label class="m-1"><input type="radio" value="All"
+                                              th:checked="${filterField == 'All'}"
+                                              name="searchField"
+                                              onchange="filterTable()">All</label>
+                    <label class="m-1"><input type="radio" value="Id"
+                                              th:checked="${filterField == 'Id'}"
+                                              name="searchField"
+                                              onchange="filterTable()">Id</label>
+                    <label class="m-1"><input type="radio" value="Name"
+                                              th:checked="${filterField == 'Name'}"
+                                              name="searchField"
+                                              onchange="filterTable()">Name</label>
+                    <label class="m-1"><input type="radio" value="Surname"
+                                              th:checked="${filterField == 'Surname'}"
+                                              name="searchField"
+                                              onchange="filterTable()">Surname</label>
+                    <label class="m-1"><input type="radio" value="Email"
+                                              th:checked="${filterField == 'Email'}"
+                                              name="searchField"
+                                              onchange="filterTable()">Email</label>
+                    <label class="m-1"><input type="radio" value="Age"
+                                              th:checked="${filterField == 'Age'}"
+                                              name="searchField"
+                                              onchange="filterTable()">Age</label>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+</body>
+</html>

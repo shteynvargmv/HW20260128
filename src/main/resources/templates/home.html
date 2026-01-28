@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/main :: html(content=~{::main})}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageName}"></title>
+</head>
+<body>
+<main>
+    <a th:style="'margin-left:10px'">On page: </a>
+    <a class="btn pp" onclick="setPersonsOnPage(10)">+10</a>
+    <a class="btn pm" onclick="setPersonsOnPage(-10)">-10</a>
+    <div th:if="${dtos!=null and !dtos.getData().isEmpty()}">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item" th:classappend="${dtos.getCurrentPage() == 1} ? 'disabled'">
+                    <a class="page-link"
+                       th:href="@{/home/people(page=${dtos.getCurrentPage() - 1})}">
+                        Previous
+                    </a>
+                </li>
+                <li class="page-item" th:each="pageNum : ${#numbers.sequence(1, dtos.getPagesCount())}">
+                    <a class="page-link"
+                       th:href="@{/home/people(page=${pageNum})}"
+                       th:text="${pageNum}"
+                       th:classappend="${dtos.getCurrentPage() == pageNum} ? 'active'">
+                    </a></li>
+                <li class="page-item" th:classappend="${dtos.getCurrentPage() == dtos.getPagesCount()} ? 'disabled'">
+                    <a class="page-link" th:href="@{/home/people(page=${dtos.getCurrentPage() + 1})}">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div id="peopleTable" class="tb" th:if="${dtos!=null and !dtos.getData().isEmpty()}">
+        <table>
+            <thead>
+            <tr>
+                <th></th>
+                <th th:onclick="'sortTable(1,'+${(dtos.getCurrentPage()-1)*dtos.getOnPage()}+')'">Id</th>
+                <th th:onclick="'sortTable(2,'+${(dtos.getCurrentPage()-1)*dtos.getOnPage()}+')'">Name</th>
+                <th th:onclick="'sortTable(3,'+${(dtos.getCurrentPage()-1)*dtos.getOnPage()}+')'">Surname</th>
+                <th th:onclick="'sortTable(4,'+${(dtos.getCurrentPage()-1)*dtos.getOnPage()}+')'">Email</th>
+                <th th:onclick="'sortTable(5,'+${(dtos.getCurrentPage()-1)*dtos.getOnPage()}+')'">Age</th>
+                <th th:onclick="'sortTable(6,'+${(dtos.getCurrentPage()-1)*dtos.getOnPage()}+')'">Profession</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="dto,stat : ${dtos.getData()}" th:attr="data-id=${dto.getPerson().getId()}">
+                <td th:style="'min-width: 70px !important;'"
+                    th:text="${stat.index + 1 + (dtos.getCurrentPage()-1)*dtos.getOnPage()}"></td>
+                <td th:style="'min-width: 50px !important;'" th:text="${dto.getPerson().getId()}"></td>
+                <td th:style="'min-width: 75px !important;'" th:text="${dto.getPerson().getName()}"></td>
+                <td th:style="'min-width: 95px !important;'" th:text="${dto.getPerson().getSurname()}"></td>
+                <td th:style="'min-width: 70px !important;'" th:text="${dto.getPerson().getEmail()}"></td>
+                <td th:style="'min-width: 60px !important;'" th:text="${dto.getPerson().getAge()}"></td>
+                <td th:style="'min-width: 110px !important;'" th:text="${dto.getProfession().getName()}"></td>
+                <td>
+                    <a class="dlt btn" th:onclick="'deleteByRow('+${dto.getPerson().getId()}+')'">Delete</a>
+                    <a class="dlt btn" th:href="@{/home/edit/{id}(id=${dto.getPerson().getId()})}">Edit</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div th:if="${dtos==null or dtos.getData().isEmpty()}">
+        <p>No data</p>
+    </div>
+
+</main>
+</body>
+</html>
